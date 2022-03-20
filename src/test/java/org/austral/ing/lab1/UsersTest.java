@@ -48,12 +48,16 @@ public class UsersTest {
         final User luke =
                 User.create("luke.skywalker@jedis.org")
                         .firstName("Luke")
-                        .lastName("Skywalker").
-                        build();
+                        .lastName("Skywalker")
+                        .password("HolaSoyLuke")
+                        .idNumber("12345")
+                        .build();
         final User leia =
                 User.create("leia.skywalker@jedis.org")
                         .firstName("Leia")
                         .lastName("Skywalker")
+                        .password("HolaSoyLeia")
+                        .idNumber("123456")
                         .build();
 
         entityManager.persist(luke);
@@ -66,7 +70,7 @@ public class UsersTest {
                 .getResultList();
 
         Assert.assertEquals(2 , allUsers.size());
-
+       // System.out.println("En esta base de datos hay " + allUsers.size() + " Usuarios");
         final List<User> users = entityManager
                 .createQuery("SELECT u FROM User u WHERE u.email LIKE :email", User.class)
                 .setParameter("email", "luke.skywalker@jedis.org").getResultList();

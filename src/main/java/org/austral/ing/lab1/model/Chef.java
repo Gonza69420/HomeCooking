@@ -1,17 +1,25 @@
 package org.austral.ing.lab1.model;
 
+
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "USUARIOS") //creacion de tabla con el nombre usuario
-public class User {
-//test
+public class Chef {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Column(name = "FIRST_NAME")
     private String firstName;
@@ -34,19 +42,11 @@ public class User {
     @Column(name = "PHONE_NUMBER", unique = true)
     private String phoneNumber;
 
-    public User() {
-    }
+    @Column(name = "Estado")
+    private Boolean estado;
 
-    public static UserBuilder create(String email) {
-        return new UserBuilder(email);
-    }
+    public Chef(){
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getFirstName() {
@@ -97,15 +97,23 @@ public class User {
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public static class UserBuilder {
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    public static class ChefBuilder {
         private String firstName;
         private String lastName;
         private String idNumber;
@@ -115,42 +123,42 @@ public class User {
         private String phoneNumber;
 
 
-        public UserBuilder(String email) {
+        public ChefBuilder(String email) {
             this.email = email;
         }
 
-        public UserBuilder firstName(String firstName) {
+        public Chef.ChefBuilder firstName(String firstName) {
             this.firstName = firstName;
             return this;
         }
 
-        public UserBuilder lastName(String lastName) {
+        public Chef.ChefBuilder lastName(String lastName) {
             this.lastName = lastName;
             return this;
         }
 
-        public UserBuilder idNumber(String idNumber) {
+        public Chef.ChefBuilder idNumber(String idNumber) {
             this.idNumber = idNumber;
             return this;
         }
 
-        public UserBuilder address(String address) {
+        public Chef.ChefBuilder address(String address) {
             this.address = address;
             return this;
         }
 
-        public UserBuilder password(String password) {
+        public Chef.ChefBuilder password(String password) {
             this.password = password;
             return this;
         }
 
-        public UserBuilder phoneNumber(String phoneNumber) {
+        public Chef.ChefBuilder phoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
             return this;
         }
 
-        public User build() {
-            User user = new User();
+        public Chef build() {
+            Chef user = new Chef();
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setIdNumber(idNumber);
@@ -161,7 +169,7 @@ public class User {
             return user;
         } //commit
 
-        private void User(UserBuilder builder) {
+        private void Chef(Chef.ChefBuilder builder) {
             this.firstName = builder.firstName;
             this.lastName = builder.lastName;
             this.password = builder.password;
@@ -171,8 +179,5 @@ public class User {
             this.phoneNumber = builder.phoneNumber;
 
         }
-
-
-
     }
 }
