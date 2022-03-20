@@ -21,13 +21,20 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
+    @Column(name = "ID_NUMBER", nullable = false, unique = true)
+    private String idNumber;
+
+    @Column(name = "ADDRESS", nullable = false)
+    private String address;
+
     @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
 
     @Column(name = "PASSWORD")
     private String password;
 
-    public User() { }
+    public User() {
+    }
 
     public static UserBuilder create(String email) {
         return new UserBuilder(email);
@@ -49,12 +56,36 @@ public class User {
         this.lastName = lastName;
     }
 
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getId() {
@@ -65,35 +96,16 @@ public class User {
         this.id = id;
     }
 
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    private User(UserBuilder builder) {
-        this.firstName = builder.firstName;
-        this.lastName = builder.lastName;
-        this.password = builder.password;
-        this.email = builder.email;
-    }
-
     public static class UserBuilder {
-        private final String email;
         private String firstName;
         private String lastName;
+        private String idNumber;
+        private String address;
+        private String email;
         private String password;
 
         public UserBuilder(String email) {
             this.email = email;
-        }
-
-        public UserBuilder password(String password) {
-            this.password = password;
-            return this;
         }
 
         public UserBuilder firstName(String firstName) {
@@ -106,11 +118,42 @@ public class User {
             return this;
         }
 
-
-        public User build() {
-            return new User(this);
+        public UserBuilder idNumber(String idNumber) {
+            this.idNumber = idNumber;
+            return this;
         }
 
-    }
+        public UserBuilder address(String address) {
+            this.address = address;
+            return this;
+        }
 
+        public UserBuilder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public User build() {
+            User user = new User();
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setIdNumber(idNumber);
+            user.setAddress(address);
+            user.setEmail(email);
+            user.setPassword(password);
+            return user;
+        }
+
+        private User(UserBuilder builder) {
+            this.firstName = builder.firstName;
+            this.lastName = builder.lastName;
+            this.password = builder.password;
+            this.email = builder.email;
+            this.address = builder.address;
+            this.idNumber = builder.idNumber;
+        }
+
+
+
+    }
 }
