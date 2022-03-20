@@ -142,7 +142,7 @@ public class User {
             user.setEmail(email);
             user.setPassword(password);
             return user;
-        }
+        } //commit
 
         private User(UserBuilder builder) {
             this.firstName = builder.firstName;
