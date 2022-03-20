@@ -13,7 +13,7 @@ import static austral.ing.lab1.util.EntityManagers.currentEntityManager;
 import static austral.ing.lab1.util.LangUtils.checkedList;
 import static austral.ing.lab1.util.Transactions.tx;
 
-public class Users {
+public class Users { //Fixing User
 
   public static Optional<User> findById(Long id){
     return tx(() ->
