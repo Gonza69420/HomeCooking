@@ -1,6 +1,6 @@
 package org.austral.ing.lab1.repository;
 
-import org.austral.ing.lab1.model.User;
+import org.austral.ing.lab1.model.Chef;
 import org.austral.ing.lab1.util.LangUtils;
 
 import javax.persistence.EntityTransaction;
@@ -11,7 +11,7 @@ import static org.austral.ing.lab1.util.EntityManagers.currentEntityManager;
 import static org.austral.ing.lab1.util.LangUtils.checkedList;
 import static org.austral.ing.lab1.util.Transactions.tx;
 
-public class Chef {
+public class Chefs {
 
 
     public static Optional<Chef> findById(Long id){
@@ -20,8 +20,8 @@ public class Chef {
         );
     }
 
-    public static Optional<Chef> findByEmail(String email){
-        return tx(() -> LangUtils.<Chef>checkedList(currentEntityManager()
+    public static Optional<Chefs> findByEmail(String email){
+        return tx(() -> LangUtils.<Chefs>checkedList(currentEntityManager()
                         .createQuery("SELECT u FROM Chef u WHERE u.email LIKE :email")
                         .setParameter("email", email).getResultList()).stream()
                 .findFirst()
